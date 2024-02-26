@@ -9,6 +9,11 @@ const MenuCategory = ({ items }) => {
           <MenuItem key={item._id} item={item}></MenuItem>
         ))}
       </div>
+      <div className="text-center my-10 text-2xl">
+        <button className="uppercase text-center rounded-xl border-[#1f2937]  border-b-4 py-2 px-5 ">
+          ORDER YOUR FAVOURITE FOOD
+        </button>
+      </div>
     </div>
   );
 };
