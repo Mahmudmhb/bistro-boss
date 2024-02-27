@@ -9,7 +9,6 @@ import ShareBannar from "../../../Sheard/ShareBannar";
 import MenuCategory from "../../../Sheard/MenuCategory/MenuCategory";
 import UseManu from "../../../Hooks/UseMenu/UseManu";
 import Heading from "../../../Sheard/Heading";
-import ShearCover from "../../../Sheard/ShearCover";
 
 const Menu = () => {
   const [menus] = UseManu();
@@ -23,8 +22,6 @@ const Menu = () => {
       <Helmet>
         <title>Menu || Bistro Boss</title>
       </Helmet>
-      {/* <h1>this is our menu page</h1>
-       */}
 
       <ShareBannar
         tilte={"our menu"}
@@ -35,44 +32,46 @@ const Menu = () => {
       <Heading title={"don't miss"} heading={"today's offer"}></Heading>
       <MenuCategory items={newOfferd}></MenuCategory>
 
-      <ShearCover
+      <MenuCategory
         image={dessertBg}
-        tilte={"dessert"}
+        tilte={"desserts"}
         subTitle={
           "Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
         }
-      ></ShearCover>
-
-      <MenuCategory items={dessert}></MenuCategory>
+        items={dessert}
+      ></MenuCategory>
 
       {/* pizza  */}
-      <ShearCover
+
+      <MenuCategory
         image={pizzabg}
-        tilte={"Pizza"}
+        tilte={"pizza"}
         subTitle={
           "Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
         }
-      ></ShearCover>
-      <MenuCategory items={pizza}></MenuCategory>
+        items={pizza}
+      ></MenuCategory>
 
       {/* salad  */}
-      <ShearCover
+
+      <MenuCategory
         image={saladbg}
         tilte={"salads"}
         subTitle={
           "Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
         }
-      ></ShearCover>
-      <MenuCategory items={salad}></MenuCategory>
+        items={salad}
+      ></MenuCategory>
       {/* soup  */}
-      <ShearCover
+
+      <MenuCategory
         image={soupbd}
         tilte={"soups"}
         subTitle={
           "Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
         }
-      ></ShearCover>
-      <MenuCategory items={soup}></MenuCategory>
+        items={soup}
+      ></MenuCategory>
     </div>
   );
 };
