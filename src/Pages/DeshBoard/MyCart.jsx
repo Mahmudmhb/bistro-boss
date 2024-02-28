@@ -1,11 +1,38 @@
 import { FaTrash } from "react-icons/fa";
 import useCart from "../../Hooks/useCart/useCart";
 import Heading from "../../Sheard/Heading";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure/useAxiosSecure";
 
 const MyCart = () => {
-  const [cart] = useCart();
+  const [cart, refetch] = useCart();
 
   const totalPrice = cart.reduce((total, items) => total + items.price, 0);
+  const axiosSecure = useAxiosSecure();
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want delete this item !",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/carts/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your item has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          }
+        });
+      }
+    });
+  };
   return (
     <div className="w-full">
       <Heading title={"my cart"} heading={"WANNA ADD MORE?"}></Heading>
@@ -53,7 +80,10 @@ const MyCart = () => {
                 <td>{item.name}</td>
                 <td>{item.price}</td>
                 <th>
-                  <button className="btn btn-ghost btn-xs">
+                  <button
+                    onClick={() => handleDelete(item._id)}
+                    className="btn btn-ghost btn-xs"
+                  >
                     <FaTrash className="text-2xl"></FaTrash>{" "}
                   </button>
                 </th>
