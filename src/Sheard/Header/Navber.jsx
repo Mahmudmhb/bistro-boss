@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import useAuth from "../../Hooks/useAuth/useAuth";
 
 const Navber = () => {
+  const { user } = useAuth();
   const nav = (
     <>
       <li>
@@ -13,6 +15,21 @@ const Navber = () => {
       <li>
         <Link to="/shop">Shop</Link>
       </li>
+      {user ? (
+        <>
+          <li>
+            <Link>
+              <button>LogOut</button>
+            </Link>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+        </>
+      )}
     </>
   );
   return (
