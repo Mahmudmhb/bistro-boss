@@ -24,10 +24,12 @@ const Navber = () => {
         <Link to="/shop/salads">Shop</Link>
       </li>
       <li>
-        <button className="btn">
-          <FaShoppingCart />
-          <div className="badge badge-secondary">+0{cart.length}</div>{" "}
-        </button>
+        <Link to="deshboard/mycart">
+          <button className="btn">
+            <FaShoppingCart />
+            <div className="badge badge-secondary">+0{cart.length}</div>{" "}
+          </button>
+        </Link>
       </li>
       {user ? (
         <>
@@ -47,7 +49,7 @@ const Navber = () => {
     </>
   );
   return (
-    <div className="navbar max-w-screen-xl fixed z-10 opacity-60 text-white bg-[#191a1c]">
+    <div className="navbar max-w-screen-xl fixed z-10 opacity-70 text-white bg-[#191a1c]">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
