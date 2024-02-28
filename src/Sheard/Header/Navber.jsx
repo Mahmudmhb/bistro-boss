@@ -2,12 +2,16 @@ import { Link } from "react-router-dom";
 // import logo from "../../assets/logo.png";
 import useAuth from "../../Hooks/useAuth/useAuth";
 import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../Hooks/useCart/useCart";
 
 const Navber = () => {
   const { user, handleLogOut } = useAuth();
   const handleSignOut = () => {
     handleLogOut().then().catch();
   };
+  const [cart] = useCart();
+  console.log(cart);
+
   const nav = (
     <>
       <li>
@@ -20,9 +24,9 @@ const Navber = () => {
         <Link to="/shop/salads">Shop</Link>
       </li>
       <li>
-        <button>
+        <button className="btn">
           <FaShoppingCart />
-          <div className="badge badge-secondary">+0</div>{" "}
+          <div className="badge badge-secondary">+0{cart.length}</div>{" "}
         </button>
       </li>
       {user ? (
@@ -64,7 +68,7 @@ const Navber = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm uppercase dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm uppercase dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 font-bold rounded-box w-52"
           >
             {nav}
           </ul>

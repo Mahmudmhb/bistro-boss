@@ -1,19 +1,21 @@
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure/useAxiosSecure";
+import useCart from "../../../Hooks/useCart/useCart";
 
 const FootCard = ({ item }) => {
+  const [, refetch] = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   console.log(location);
   const axiosSecure = useAxiosSecure();
   const { image, price, recipe, name, _id } = item;
-  const handleAddToCard = (food) => {
+  const handleAddToCard = () => {
     if (user && user.email) {
-      console.log(food, user.email);
+      // console.log(food, user.email);
       const cartItem = {
         menuId: _id,
         email: user.email,
@@ -36,6 +38,7 @@ const FootCard = ({ item }) => {
         showConfirmButton: false,
         timer: 1500,
       });
+      refetch();
     } else {
       Swal.fire({
         title: "Please Login?",
@@ -69,7 +72,7 @@ const FootCard = ({ item }) => {
           <div className="card-actions">
             <div className="text-center my-10 text-2xl">
               <button
-                onClick={() => handleAddToCard(item)}
+                onClick={handleAddToCard}
                 className="uppercase text-center rounded-xl border-[#1f2937]  border-b-4 py-2 px-5 "
               >
                 Add To Cart
