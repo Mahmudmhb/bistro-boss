@@ -1,5 +1,58 @@
+import Swal from "sweetalert2";
+import useAuth from "../../../Hooks/useAuth/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure/useAxiosSecure";
+
 const FootCard = ({ item }) => {
-  const { image, price, recipe, name } = item;
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
+  const axiosSecure = useAxiosSecure();
+  const { image, price, recipe, name, _id } = item;
+  const handleAddToCard = (food) => {
+    if (user && user.email) {
+      console.log(food, user.email);
+      const cartItem = {
+        menuId: _id,
+        email: user.email,
+        image,
+        name,
+        price,
+      };
+      axiosSecure
+        .post("/carts", cartItem)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((res) => {
+          console.log(res.data);
+        });
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your Food Add To Cart",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else {
+      Swal.fire({
+        title: "Please Login?",
+        text: "if you want to add to cart please login first",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // <Navigate to={"/login"} ></Navigate>;
+          navigate("/login");
+        }
+      });
+    }
+  };
 
   return (
     <div>
@@ -15,7 +68,10 @@ const FootCard = ({ item }) => {
           <p>{recipe}</p>
           <div className="card-actions">
             <div className="text-center my-10 text-2xl">
-              <button className="uppercase text-center rounded-xl border-[#1f2937]  border-b-4 py-2 px-5 ">
+              <button
+                onClick={() => handleAddToCard(item)}
+                className="uppercase text-center rounded-xl border-[#1f2937]  border-b-4 py-2 px-5 "
+              >
                 Add To Cart
               </button>
             </div>

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 // import logo from "../../assets/logo.png";
 import useAuth from "../../Hooks/useAuth/useAuth";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Navber = () => {
   const { user, handleLogOut } = useAuth();
@@ -17,6 +18,12 @@ const Navber = () => {
       </li>
       <li>
         <Link to="/shop/salads">Shop</Link>
+      </li>
+      <li>
+        <button>
+          <FaShoppingCart />
+          <div className="badge badge-secondary">+0</div>{" "}
+        </button>
       </li>
       {user ? (
         <>

@@ -1,12 +1,14 @@
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import loginImg from "../../../assets/others/authentication1.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth/useAuth";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
 const Login = () => {
   const { handleLogin } = useAuth();
+  const location = useLocation();
+  console.log(location);
   const navigate = useNavigate();
   const {
     register,
@@ -26,7 +28,9 @@ const Login = () => {
           showConfirmButton: false,
           timer: 2000,
         });
-        navigate("/");
+        // navigate(location?.state.pathname ? location?.pathname : "/");
+
+        navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
         console.log(error.message);

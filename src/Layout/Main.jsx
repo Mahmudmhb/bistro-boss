@@ -4,7 +4,7 @@ import Footer from "../Pages/Menu/Menu/Footer/Footer";
 
 const Main = () => {
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const noHeaderFooter = location.pathname.includes("login");
   return (
     <div>
