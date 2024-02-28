@@ -7,7 +7,9 @@ const FootCard = ({ item }) => {
         <figure>
           <img src={image} alt="Shoes" className="" />
         </figure>
-        <p>{price}</p>
+        <div className="absolute bg-black mt-5  right-4">
+          <p className="text-white p-2 px-3 ">{price}</p>
+        </div>
         <div className="card-body items-center text-center">
           <h2 className="card-title">{name}</h2>
           <p>{recipe}</p>

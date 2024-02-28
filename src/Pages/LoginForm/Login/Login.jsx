@@ -1,14 +1,47 @@
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import loginImg from "../../../assets/others/authentication1.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth/useAuth";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const { handleLogin } = useAuth();
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    // watch,
+    // formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    handleLogin(data.email, data.password)
+      .then((result) => {
+        console.log(result.user);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Successfully Login`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   return (
     <div className="md:flex items-center justify-between  ">
       <div className="w-1/2">
         <img src={loginImg} alt="" />
       </div>
-      <form className="flex  flex-col py-20 w-full p-20 gap-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex  flex-col py-20 w-full p-20 gap-4"
+      >
         <h1 className="text-center text-2xl mt-20">login</h1>
         <div>
           <div className="mb-2 block w-full">
@@ -20,13 +53,19 @@ const Login = () => {
             placeholder="name@flowbite.com"
             required
             className="w-full"
+            {...register("email")}
           />
         </div>
         <div>
           <div className="mb-2 block w-full">
-            <Label htmlFor="password1" value="Your password" />
+            <Label htmlFor="password" value="Your password" />
           </div>
-          <TextInput id="password1" type="password" required />
+          <TextInput
+            id="password"
+            type="password"
+            {...register("password")}
+            required
+          />
         </div>
         <div className="flex items-center gap-2">
           <Checkbox id="remember" />

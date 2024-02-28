@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 
 const Shop = () => {
   const categorise = ["salads", "pizza", "soups", "desserts", "drinks"];
-  console.log(categorise);
+  // console.log(categorise);
   const { category } = useParams();
   console.log(category);
   const initialIndex = categorise.indexOf(category);

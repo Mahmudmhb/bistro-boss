@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo.png";
+// import logo from "../../assets/logo.png";
 import useAuth from "../../Hooks/useAuth/useAuth";
 
 const Navber = () => {
-  const { user } = useAuth();
+  const { user, handleLogOut } = useAuth();
+  const handleSignOut = () => {
+    handleLogOut().then().catch();
+  };
   const nav = (
     <>
       <li>
@@ -13,13 +16,13 @@ const Navber = () => {
         <Link to="/menu">Menu</Link>
       </li>
       <li>
-        <Link to="/shop">Shop</Link>
+        <Link to="/shop/salads">Shop</Link>
       </li>
       {user ? (
         <>
           <li>
             <Link>
-              <button>LogOut</button>
+              <button onClick={handleSignOut}>LogOut</button>
             </Link>
           </li>
         </>

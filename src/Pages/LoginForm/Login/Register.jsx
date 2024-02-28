@@ -1,12 +1,14 @@
 import { Button, Label, TextInput } from "flowbite-react";
 import loginImg from "../../../assets/others/authentication1.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 // import { useContext } from "react";
 // import { AuthContext } from "../../../Provider/AuthProvider/AuthProvider";
 import useAuth from "../../../Hooks/useAuth/useAuth";
+import Swal from "sweetalert2";
 const Register = () => {
   const { handleRegister } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -18,6 +20,14 @@ const Register = () => {
     handleRegister(data.email, data.password)
       .then((result) => {
         console.log(result.user);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Successfully Register`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        navigate("/");
       })
       .catch((error) => {
         console.log(error.message);
