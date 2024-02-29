@@ -16,7 +16,7 @@ const ShearLogin = () => {
           email: result.user.email,
         };
         axiosPublic.post("/users", userInfo).then((res) => {
-          console.log(res.data);
+          //   console.log(res.data);
         });
         Swal.fire({
           position: "center",
@@ -26,7 +26,7 @@ const ShearLogin = () => {
           timer: 2000,
         });
         navigate("/");
-        console.log(result.user);
+        // console.log(result.user);
       })
       .catch((error) => {
         console.log(error);

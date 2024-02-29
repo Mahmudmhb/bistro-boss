@@ -9,6 +9,11 @@ import DeshBoard from "../Pages/DeshBoard/DeshBoard";
 import UserHome from "../Pages/DeshBoard/UserHome";
 import MyCart from "../Pages/DeshBoard/MyCart";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import AdminHome from "../Pages/DeshBoard/Admin/AdminHome";
+import AddItems from "../Pages/DeshBoard/Admin/AddItems";
+import AllUsers from "../Pages/DeshBoard/Admin/AllUsers";
+import Managebook from "../Pages/DeshBoard/Admin/Managebook";
+import ManageItems from "../Pages/DeshBoard/Admin/ManageItems";
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +61,26 @@ export const router = createBrowserRouter([
       {
         path: "mycart",
         element: <MyCart></MyCart>,
+      },
+      {
+        path: "admin",
+        element: <AdminHome></AdminHome>,
+      },
+      {
+        path: "additems",
+        element: <AddItems></AddItems>,
+      },
+      {
+        path: "allusers",
+        element: <AllUsers></AllUsers>,
+      },
+      {
+        path: "managebook",
+        element: <Managebook></Managebook>,
+      },
+      {
+        path: "manageitems",
+        element: <ManageItems></ManageItems>,
       },
     ],
   },

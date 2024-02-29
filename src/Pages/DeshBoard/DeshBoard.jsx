@@ -4,49 +4,88 @@ import {
   FaCalendar,
   FaHamburger,
   FaHome,
+  FaItunes,
+  FaList,
   FaMoneyBill,
-  FaProductHunt,
+  // FaProductHunt,
   FaShoppingBag,
   FaShoppingCart,
+  FaUserAlt,
   FaXbox,
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 
+const isAdmin = true;
+
 const DeshBoard = () => {
   return (
     <div className="flex ">
-      <div className="w-72 bg-[#d1a054]  text-3xl h-screen uppercase">
+      <div className="w-72 bg-[#d1a054]  text-2xl h-screen uppercase">
         <ul className="menu p-5">
-          <li className="text-2xl">
-            <NavLink to="/deshboard/userhome">
-              <FaHome></FaHome> User Home
-            </NavLink>
-          </li>
-          <li className="text-2xl">
-            <NavLink to="/reservation">
-              <FaCalendar></FaCalendar> reservation
-            </NavLink>
-          </li>
-          <li className="text-2xl">
-            <NavLink to="/payment">
-              <FaMoneyBill></FaMoneyBill> payment history
-            </NavLink>
-          </li>
-          <li className="text-2xl">
-            <NavLink to="/deshboard/mycart">
-              <FaShoppingCart></FaShoppingCart> my cart
-            </NavLink>
-          </li>
-          <li className="text-2xl">
-            <NavLink to="/addreview">
-              <FaBook></FaBook> add review
-            </NavLink>
-          </li>
-          <li className="text-2xl">
-            <NavLink to="/mybooking">
-              <FaBookOpen></FaBookOpen> my booking
-            </NavLink>
-          </li>
+          {isAdmin ? (
+            <>
+              <li className="text-2xl">
+                <NavLink to="/deshboard/admin">
+                  <FaHome></FaHome> Admin Home
+                </NavLink>
+              </li>
+              <li className="text-2xl">
+                <NavLink to="/deshboard/additems">
+                  <FaItunes></FaItunes> add items
+                </NavLink>
+              </li>
+              <li className="text-2xl">
+                <NavLink to="/deshboard/manageitems">
+                  <FaList></FaList> manage items
+                </NavLink>
+              </li>
+
+              <li className="text-2xl">
+                <NavLink to="/deshboard/managebook">
+                  <FaBook></FaBook> Manage bookings
+                </NavLink>
+              </li>
+              <li className="text-2xl">
+                <NavLink to="/deshboard/allusers">
+                  <FaUserAlt></FaUserAlt> all users
+                </NavLink>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="text-2xl">
+                <NavLink to="/deshboard/userhome">
+                  <FaHome></FaHome> User Home
+                </NavLink>
+              </li>
+              <li className="text-2xl">
+                <NavLink to="/reservation">
+                  <FaCalendar></FaCalendar> reservation
+                </NavLink>
+              </li>
+              <li className="text-2xl">
+                <NavLink to="/payment">
+                  <FaMoneyBill></FaMoneyBill> payment history
+                </NavLink>
+              </li>
+              <li className="text-2xl">
+                <NavLink to="/deshboard/mycart">
+                  <FaShoppingCart></FaShoppingCart> my cart
+                </NavLink>
+              </li>
+              <li className="text-2xl">
+                <NavLink to="/addreview">
+                  <FaBook></FaBook> add review
+                </NavLink>
+              </li>
+              <li className="text-2xl">
+                <NavLink to="/mybooking">
+                  <FaBookOpen></FaBookOpen> my booking
+                </NavLink>
+              </li>
+            </>
+          )}
+
           <div className="divider"></div>
           <li className="text-2xl">
             <NavLink to="/">
