@@ -10,7 +10,7 @@ const Navber = () => {
     handleLogOut().then().catch();
   };
   const [cart] = useCart();
-  console.log(cart);
+  // console.log(cart);
 
   const nav = (
     <>

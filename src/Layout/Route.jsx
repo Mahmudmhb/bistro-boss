@@ -8,6 +8,7 @@ import Register from "../Pages/LoginForm/Login/Register";
 import DeshBoard from "../Pages/DeshBoard/DeshBoard";
 import UserHome from "../Pages/DeshBoard/UserHome";
 import MyCart from "../Pages/DeshBoard/MyCart";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -42,7 +43,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "deshboard",
-    element: <DeshBoard></DeshBoard>,
+    element: (
+      <PrivateRoute>
+        <DeshBoard></DeshBoard>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "userhome",

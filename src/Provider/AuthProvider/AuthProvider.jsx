@@ -5,9 +5,13 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import { app } from "../../Firebase/Firebase.init";
 const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
@@ -28,6 +32,15 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  const handleUpdate = (name, photourl) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photourl,
+    });
+  };
+  const handleGoogle = () => {
+    return signInWithPopup(auth, googleProvider);
+  };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -41,6 +54,8 @@ const AuthProvider = ({ children }) => {
     handleLogOut,
     user,
     isLoading,
+    handleUpdate,
+    handleGoogle,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
