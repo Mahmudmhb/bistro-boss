@@ -1,13 +1,17 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../useAuth/useAuth";
 
 export const axiosSecure = axios.create({
   baseURL: "http://localhost:5000",
 });
 const useAxiosSecure = () => {
+  const { handleLogOut } = useAuth();
+  const navigate = useNavigate();
   axiosSecure.interceptors.request.use(
     function (config) {
       const token = localStorage.getItem("access-token");
-      console.log("inside token", token);
+      // console.log("inside token", token);
       // Do something before request is sent
       config.headers.authorization = `Bearer ${token}`;
       return config;
@@ -23,12 +27,17 @@ const useAxiosSecure = () => {
       // Do something with response data
       return response;
     },
-    function (error) {
+    async (error) => {
       // Any status codes that falls outside the range of 2xx cause this function to trigger
       // Do something with response error
 
       const status = error.response.status;
-      console.log("inside the interceptors", status);
+      if (status === 401 || status === 403) {
+        await handleLogOut();
+
+        navigate("/login");
+      }
+      // console.log("inside the interceptors", status);
       return Promise.reject(error);
     }
   );

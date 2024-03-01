@@ -59,7 +59,7 @@ const AuthProvider = ({ children }) => {
       setIsLoading(false);
     });
     return () => unsubscribe();
-  }, []);
+  }, [axiosPublic]);
   const authInfo = {
     handleRegister,
     handleLogin,
