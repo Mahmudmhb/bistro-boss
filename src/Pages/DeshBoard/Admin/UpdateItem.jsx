@@ -2,19 +2,58 @@ import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router-dom";
 import Heading from "../../../Sheard/Heading";
 import { IoIosSend } from "react-icons/io";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic/useAxiosPublic";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure/useAxiosSecure";
+
+const image_api_key = import.meta.env.VITE_IMAGE_KEY;
+// console.log(image_api_key);
+const image_link = `https://api.imgbb.com/1/upload?key=${image_api_key}`;
 
 const UpdateItem = () => {
   const loader = useLoaderData();
-  console.log(loader);
-
+  console.log(loader._id);
   const { register, handleSubmit, reset } = useForm();
+  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const onSubmit = async (data) => {
     console.log(data);
+    const imageFile = { image: data.image[0] };
+    // console.log(imageFile);
+
+    const res = await axiosPublic.post(image_link, imageFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    const image = res.data.data.display_url;
+
+    if (res.data.success) {
+      const menuItems = {
+        name: data.name,
+        price: parseFloat(data.price),
+        recipe: data.recipe,
+        category: data.category,
+        image: image,
+      };
+      const res = await axiosSecure.patch(`/menus/${loader._id}`, menuItems);
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        reset();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `Your ${data.name}  item Upadated`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    }
   };
 
   return (
     <div className="w-full">
-      <Heading title={"What`s new?"} heading={"add an item"}></Heading>
+      <Heading title={"What`s new?"} heading={"add an Update"}></Heading>
 
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -27,6 +66,7 @@ const UpdateItem = () => {
                 <input
                   type="text"
                   placeholder="Recipe name*"
+                  defaultValue={loader.name}
                   className="input  rounded-none  w-full "
                   {...register("name")}
                 />
@@ -39,7 +79,7 @@ const UpdateItem = () => {
                   <span className="label-text">Category</span>
                 </div>
                 <select
-                  defaultValue={"default"}
+                  defaultValue={loader.category}
                   {...register("category")}
                   className="select "
                 >
@@ -64,6 +104,7 @@ const UpdateItem = () => {
                   type="number"
                   placeholder="Type here your Price"
                   className="input rounded-none  w-full "
+                  defaultValue={loader.price}
                   {...register("price")}
                 />
               </label>
@@ -77,6 +118,7 @@ const UpdateItem = () => {
                 className="textarea rounded-none  h-24"
                 placeholder="Recipe Details"
                 {...register("recipe")}
+                defaultValue={loader.recipe}
               ></textarea>
             </label>
 
