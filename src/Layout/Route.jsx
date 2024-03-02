@@ -14,6 +14,8 @@ import AddItems from "../Pages/DeshBoard/Admin/AddItems";
 import AllUsers from "../Pages/DeshBoard/Admin/AllUsers";
 import Managebook from "../Pages/DeshBoard/Admin/Managebook";
 import ManageItems from "../Pages/DeshBoard/Admin/ManageItems";
+import AdminRoute from "./AdminRoute/AdminRoute";
+import Contact from "../Pages/Contact/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +29,10 @@ export const router = createBrowserRouter([
       {
         path: "/menu",
         element: <Menu></Menu>,
+      },
+      {
+        path: "contact",
+        element: <Contact></Contact>,
       },
       {
         path: "shop",
@@ -64,23 +70,43 @@ export const router = createBrowserRouter([
       },
       {
         path: "admin",
-        element: <AdminHome></AdminHome>,
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
       },
       {
         path: "additems",
-        element: <AddItems></AddItems>,
+        element: (
+          <AdminRoute>
+            <AddItems></AddItems>
+          </AdminRoute>
+        ),
       },
       {
         path: "allusers",
-        element: <AllUsers></AllUsers>,
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
       },
       {
         path: "managebook",
-        element: <Managebook></Managebook>,
+        element: (
+          <AdminRoute>
+            <Managebook></Managebook>
+          </AdminRoute>
+        ),
       },
       {
         path: "manageitems",
-        element: <ManageItems></ManageItems>,
+        element: (
+          <AdminRoute>
+            <ManageItems></ManageItems>
+          </AdminRoute>
+        ),
       },
     ],
   },

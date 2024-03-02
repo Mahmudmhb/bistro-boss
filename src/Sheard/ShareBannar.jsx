@@ -1,5 +1,3 @@
-import React from "react";
-
 const ShareBannar = ({ image, tilte, subTitle }) => {
   return (
     <div>

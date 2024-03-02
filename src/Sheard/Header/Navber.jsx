@@ -6,6 +6,7 @@ import useCart from "../../Hooks/useCart/useCart";
 
 const Navber = () => {
   const { user, handleLogOut } = useAuth();
+  console.log(user);
   const handleSignOut = () => {
     handleLogOut().then().catch();
   };
@@ -18,34 +19,17 @@ const Navber = () => {
         <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to="/menu">Menu</Link>
+        <Link to="/menu">our Menu</Link>
       </li>
       <li>
-        <Link to="/shop/salads">Shop</Link>
+        <Link to="/shop/salads">our Shop</Link>
       </li>
       <li>
-        <Link to="deshboard/mycart">
-          <button className="btn">
-            <FaShoppingCart />
-            <div className="badge badge-secondary">+0{cart.length}</div>{" "}
-          </button>
-        </Link>
+        <Link to="/contact">contact</Link>
       </li>
-      {user ? (
-        <>
-          <li>
-            <Link>
-              <button onClick={handleSignOut}>LogOut</button>
-            </Link>
-          </li>
-        </>
-      ) : (
-        <>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-        </>
-      )}
+      <li>
+        <Link to="deshboard/admin">deshboard</Link>
+      </li>
     </>
   );
   return (
@@ -82,8 +66,31 @@ const Navber = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu uppercase menu-horizontal px-1">{nav}</ul>
       </div>
-      <div className="navbar-end">
-        <a className="btn">Button</a>
+      <div className="navbar-end  uppercase">
+        {user ? (
+          <>
+            <Link to="deshboard/mycart">
+              <button className="flex text-2xl">
+                <FaShoppingCart />
+                <div className="">{cart.length}</div>{" "}
+              </button>
+            </Link>
+            <Link>
+              <button className="uppercase mx-2" onClick={handleSignOut}>
+                LogOut
+              </button>
+            </Link>
+            <img
+              src={user.photoURL}
+              alt=""
+              className=" mx-5 rounded-full w-12"
+            />
+          </>
+        ) : (
+          <>
+            <Link to="/login">Login</Link>
+          </>
+        )}
       </div>
     </div>
   );
