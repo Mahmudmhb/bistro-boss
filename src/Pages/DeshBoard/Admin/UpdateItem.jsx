@@ -1,52 +1,17 @@
-import { IoIosSend } from "react-icons/io";
-import Heading from "../../../Sheard/Heading";
 import { useForm } from "react-hook-form";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic/useAxiosPublic";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure/useAxiosSecure";
-import Swal from "sweetalert2";
+import { useLoaderData } from "react-router-dom";
+import Heading from "../../../Sheard/Heading";
+import { IoIosSend } from "react-icons/io";
 
-const image_api_key = import.meta.env.VITE_IMAGE_KEY;
-// console.log(image_api_key);
-const image_link = `https://api.imgbb.com/1/upload?key=${image_api_key}`;
-// console.log(image_link);
+const UpdateItem = () => {
+  const loader = useLoaderData();
+  console.log(loader);
 
-const AddItems = () => {
   const { register, handleSubmit, reset } = useForm();
-  const axiosPublic = useAxiosPublic();
-  const axiosSecure = useAxiosSecure();
   const onSubmit = async (data) => {
-    const imageFile = { image: data.image[0] };
-    console.log(imageFile);
-
-    const res = await axiosPublic.post(image_link, imageFile, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    });
-    const image = res.data.data.display_url;
-
-    if (res.data.success) {
-      const menuItems = {
-        name: data.name,
-        price: parseFloat(data.price),
-        recipe: data.recipe,
-        category: data.category,
-        image: image,
-      };
-      const res = await axiosSecure.post("/menus", menuItems);
-      // console.log(res.data);
-      if (res.data.insertedId) {
-        reset();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: `Your ${data.name}  item added`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    }
+    console.log(data);
   };
+
   return (
     <div className="w-full">
       <Heading title={"What`s new?"} heading={"add an item"}></Heading>
@@ -126,7 +91,7 @@ const AddItems = () => {
                 className="flex justify-center mx-auto w-1/4  mt-10 gap-4 text-white p-3 items-center bg-[#d1a054]"
               >
                 {" "}
-                Add Item <IoIosSend className="inline" />
+                update Item <IoIosSend className="inline" />
               </button>
             </div>
           </div>
@@ -136,4 +101,4 @@ const AddItems = () => {
   );
 };
 
-export default AddItems;
+export default UpdateItem;

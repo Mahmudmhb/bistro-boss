@@ -16,6 +16,7 @@ import Managebook from "../Pages/DeshBoard/Admin/Managebook";
 import ManageItems from "../Pages/DeshBoard/Admin/ManageItems";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import Contact from "../Pages/Contact/Contact";
+import UpdateItem from "../Pages/DeshBoard/Admin/UpdateItem";
 
 export const router = createBrowserRouter([
   {
@@ -91,6 +92,12 @@ export const router = createBrowserRouter([
             <AllUsers></AllUsers>
           </AdminRoute>
         ),
+      },
+      {
+        path: "update/:id",
+        element: <UpdateItem></UpdateItem>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/menus/${params.id}`),
       },
       {
         path: "managebook",
