@@ -10,7 +10,7 @@ const FootCard = ({ item }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const axiosSecure = useAxiosSecure();
   const { image, price, recipe, name, _id } = item;
   const handleAddToCard = () => {
