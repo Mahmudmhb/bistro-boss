@@ -39,7 +39,7 @@ const Tesemonial = () => {
         >
           {reviws.map((reviw) => (
             <SwiperSlide key={reviw._id}>
-              <div className="flex flex-col  items-center w-5/6 mx-auto space-y-5 ">
+              <div className="flex flex-col my-20 items-center w-5/6 mx-auto space-y-5 ">
                 <div>
                   <Rating
                     style={{ maxWidth: 180 }}
