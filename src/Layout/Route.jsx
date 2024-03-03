@@ -17,6 +17,7 @@ import ManageItems from "../Pages/DeshBoard/Admin/ManageItems";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import Contact from "../Pages/Contact/Contact";
 import UpdateItem from "../Pages/DeshBoard/Admin/UpdateItem";
+import Payment from "../Pages/DeshBoard/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
       {
         path: "mycart",
         element: <MyCart></MyCart>,
+      },
+      {
+        path: "payment",
+        element: <Payment></Payment>,
       },
       {
         path: "admin",

@@ -3,6 +3,7 @@ import useCart from "../../Hooks/useCart/useCart";
 import Heading from "../../Sheard/Heading";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
   const [cart, refetch] = useCart();
@@ -46,7 +47,17 @@ const MyCart = () => {
           <h1>total price: ${totalPrice}</h1>
         </div>
         <div>
-          <button className="btn btn-primary">PAY</button>
+          {cart.length ? (
+            <>
+              <Link to="/deshboard/payment">
+                <button className="btn btn-primary">PAY</button>
+              </Link>
+            </>
+          ) : (
+            <button disabled className="btn btn-primary">
+              PAY
+            </button>
+          )}
         </div>
       </div>
 
