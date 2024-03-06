@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth/useAuth";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../Hooks/useCart/useCart";
+import useAdmin from "../../Hooks/useAdmin/useAdmin";
 
 const Navber = () => {
   const { user, handleLogOut } = useAuth();
+  const [isAdmin] = useAdmin();
   // console.log(user);
   const handleSignOut = () => {
     handleLogOut().then().catch();
@@ -27,9 +29,15 @@ const Navber = () => {
       <li>
         <Link to="/contact">contact</Link>
       </li>
-      <li>
-        <Link to="deshboard/admin">deshboard</Link>
-      </li>
+      {user && (
+        <li>
+          {user && isAdmin ? (
+            <Link to="deshboard/admin">deshboard</Link>
+          ) : (
+            <Link to="deshboard/userhome">deshboard</Link>
+          )}
+        </li>
+      )}
     </>
   );
   return (
@@ -69,7 +77,7 @@ const Navber = () => {
       <div className="navbar-end  uppercase">
         {user ? (
           <>
-            <Link to="deshboard/mycart">
+            <Link to="/deshboard/mycart">
               <button className="flex text-2xl">
                 <FaShoppingCart />
                 <div className="">{cart.length}</div>{" "}

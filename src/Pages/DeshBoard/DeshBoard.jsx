@@ -19,7 +19,7 @@ import useAdmin from "../../Hooks/useAdmin/useAdmin";
 
 const DeshBoard = () => {
   const [isAdmin] = useAdmin();
-  // const isAdmin = true;
+  // const isAdmin = false;
   return (
     <div className="flex ">
       <div className="w-72 bg-[#d1a054]  text-2xl h-screen uppercase">

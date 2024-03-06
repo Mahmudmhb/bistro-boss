@@ -16,7 +16,7 @@ import { Navigation } from "swiper/modules";
 const Tesemonial = () => {
   const [reviws, setReviws] = useState([]);
   useEffect(() => {
-    fetch("/public/reviews.json")
+    fetch("https://bistro-boss-server-one-flame.vercel.app/reviews")
       .then((res) => res.json())
       .then((data) => {
         setReviws(data);

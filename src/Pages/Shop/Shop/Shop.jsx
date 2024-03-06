@@ -39,7 +39,7 @@ const Shop = () => {
         </TabList>
         <TabPanel>
           <div
-            className="grid grid-cols-3
+            className="grid md:grid-cols-3
           gap-5"
           >
             {salad.map((item) => (
@@ -49,7 +49,7 @@ const Shop = () => {
         </TabPanel>
         <TabPanel>
           <div
-            className="grid grid-cols-3
+            className="grid md:grid-cols-3
           gap-5"
           >
             {pizza.map((item) => (
@@ -59,7 +59,7 @@ const Shop = () => {
         </TabPanel>
         <TabPanel>
           <div
-            className="grid grid-cols-3
+            className="grid md:grid-cols-3
           gap-5"
           >
             {soup.map((item) => (
@@ -69,7 +69,7 @@ const Shop = () => {
         </TabPanel>
         <TabPanel>
           <div
-            className="grid grid-cols-3
+            className="grid md:grid-cols-3
           gap-5"
           >
             {dessert.map((item) => (
@@ -79,7 +79,7 @@ const Shop = () => {
         </TabPanel>
         <TabPanel>
           <div
-            className="grid grid-cols-3
+            className="grid md:grid-cols-3
           gap-5"
           >
             {drinks.map((item) => (

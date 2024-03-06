@@ -10,7 +10,8 @@ const MyCart = () => {
 
   const totalPrice = cart.reduce((total, items) => total + items.price, 0);
   const axiosSecure = useAxiosSecure();
-  const handleDelete = (id) => {
+  const handleDelete = (item) => {
+    console.log(item);
     Swal.fire({
       title: "Are you sure?",
       text: "You want delete this item !",
@@ -21,12 +22,14 @@ const MyCart = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/carts/${id}`).then((res) => {
+        axiosSecure.delete(`/carts/${item._id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             Swal.fire({
-              title: "Deleted!",
-              text: "Your item has been deleted.",
+              position: "top-end",
               icon: "success",
+              title: `Your ${item.name} has been Deleted`,
+              showConfirmButton: false,
+              timer: 1500,
             });
             refetch();
           }
@@ -92,7 +95,7 @@ const MyCart = () => {
                 <td>{item.price}</td>
                 <th>
                   <button
-                    onClick={() => handleDelete(item._id)}
+                    onClick={() => handleDelete(item)}
                     className="btn btn-ghost btn-xs"
                   >
                     <FaTrash className="text-2xl"></FaTrash>{" "}

@@ -16,7 +16,6 @@ const Home = () => {
       </Helmet>
 
       <Slider></Slider>
-      <h1 className="text-5xl font-bold uppercase">this is home page</h1>
       <Category></Category>
       <BestoBoss></BestoBoss>
       <PopulerManu></PopulerManu>

@@ -19,7 +19,7 @@ const UseManu = () => {
   // const [menus, setMenus] = useState([]);
   // const [isLoading, setIsLoading] = useState(true);
   // useEffect(() => {
-  //   fetch("http://localhost:5000/menus")
+  //   fetch("https://bistro-boss-server-one-flame.vercel.app/menus")
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setMenus(data);

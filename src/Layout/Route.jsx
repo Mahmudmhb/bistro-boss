@@ -102,7 +102,9 @@ export const router = createBrowserRouter([
         path: "update/:id",
         element: <UpdateItem></UpdateItem>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/menus/${params.id}`),
+          fetch(
+            `https://bistro-boss-server-one-flame.vercel.app/menus/${params.id}`
+          ),
       },
       {
         path: "managebook",

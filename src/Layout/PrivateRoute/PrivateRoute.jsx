@@ -1,10 +1,12 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth/useAuth";
+import useAdmin from "../../Hooks/useAdmin/useAdmin";
 
 const PrivateRoute = ({ children }) => {
   const { user, isLoading } = useAuth();
+  const [isAdmin, isAdminLoading] = useAdmin();
   const location = useLocation();
-  if (isLoading) {
+  if (isLoading || isAdminLoading) {
     return (
       <div className="flex flex-col gap-4 w-52">
         <div className="flex gap-4 items-center">
@@ -18,7 +20,7 @@ const PrivateRoute = ({ children }) => {
       </div>
     );
   }
-  if (user) {
+  if (user || isAdmin) {
     return children;
   }
 

@@ -16,7 +16,7 @@ const Login = () => {
     // console.log(data);
     handleLogin(data.email, data.password)
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
         Swal.fire({
           position: "center",
           icon: "success",
@@ -29,7 +29,13 @@ const Login = () => {
         navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
-        console.log(error.message);
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `${error.message}`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
       });
   };
 
